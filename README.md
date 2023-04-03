@@ -1,0 +1,1 @@
+# goldpath-aws-cdk-typescript
