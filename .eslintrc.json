@@ -1,0 +1,95 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+        "@typescript-eslint",
+        "prettier"
+    ],
+    "extends": [
+        "plugin:@typescript-eslint/recommended",
+        "plugin:prettier/recommended"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "ignorePatterns": ["**/*.d.ts", "**/*.js"],
+    "rules": {
+        "require-jsdoc": [
+            "warn",
+            {
+                "require": {
+                    "FunctionDeclaration": true,
+                    "MethodDefinition": false,
+                    "ClassDeclaration": false,
+                    "ArrowFunctionExpression": false,
+                    "FunctionExpression": false
+                }
+            }
+        ],
+        "object-shorthand": [
+            "error",
+            "never"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
+        "quotes": [
+            "error",
+            "single",
+            "avoid-escape"
+        ],
+        "comma-dangle": [
+            "error",
+            "always-multiline"
+        ],
+        "curly": [
+            "error",
+            "multi-line"
+        ],
+        "prefer-const": 1,
+        "no-var": 1,
+        "no-fallthrough": 1,
+        "no-unused-vars": "off",
+        "prettier/prettier": ["off", { "singleQuote": true }],
+        "no-console": [
+            "warn",
+            {
+                "allow": [
+                    "info",
+                    "debug",
+                    "error"
+                ]
+            }
+        ],
+        "@typescript-eslint/no-unused-vars": [
+            "warn",
+            {
+                "argsIgnorePattern": "^_"
+            }
+        ],
+        "@typescript-eslint/camelcase": 0,
+        "@typescript-eslint/no-use-before-define": 0,
+        "@typescript-eslint/explicit-function-return-type": [
+            "error",
+            {
+                "allowTypedFunctionExpressions": true
+            }
+        ],
+        "sort-imports": [
+            "error",
+            {
+                "ignoreCase": true,
+                "ignoreDeclarationSort": false,
+                "ignoreMemberSort": false,
+                "memberSyntaxSortOrder": [
+                    "none",
+                    "all",
+                    "multiple",
+                    "single"
+                ]
+            }
+        ]
+    },
+    "overrides": []
+}

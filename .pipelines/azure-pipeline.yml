@@ -1,0 +1,83 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger: 
+- pd
+
+variables:
+- ${{ if eq(variables['Build.SourceBranchName'], 'pd') }}:
+  - group: variable-group-pd
+
+stages:
+  - stage: CI
+    pool:
+      vmImage: ubuntu-latest
+    jobs:
+    - job: Test_Infustructure
+      displayName: Test Infrustructure
+      steps:
+      - checkout: self
+        fetchDepth: 1
+
+      - task: NodeTool@0
+        displayName: Install Node
+        inputs:
+          versionSource: 'spec'
+          versionSpec: '$(NODE_VERSION)'
+
+      - task: Npm@1
+        displayName: Install Packages
+        inputs:
+          command: 'install'
+          workingDir: '$(System.DefaultWorkingDirectory)'
+
+      - task: Npm@1
+        displayName: Run CI
+        inputs:
+          command: 'custom'
+          workingDir: '$(System.DefaultWorkingDirectory)'
+          customCommand: 'run ci'
+
+      - task: Npm@1
+        displayName: Run synth
+        inputs:
+          command: 'custom'
+          workingDir: '$(System.DefaultWorkingDirectory)'
+          customCommand: 'run synth'
+
+  - stage: CD
+    jobs:
+    - job: Deploy_Infrustructure
+      displayName: Deploy infrustructure
+      steps:
+      - checkout: self
+        fetchDepth: 1
+      - task: NodeTool@0
+        displayName: Install Node
+        inputs:
+          versionSource: 'spec'
+          versionSpec: '$(NODE_VERSION)'
+
+      - task: Npm@1
+        displayName: Install packages
+        inputs:
+          command: 'install'
+          workingDir: '$(System.DefaultWorkingDirectory)'
+
+      - task: AWSShellScript@1
+        displayName: Run cdk diff
+        inputs:
+          awsCredentials: 'awpmc-genomics-pd'
+          regionName: 'ap-southeast-2'
+          scriptType: 'inline'
+          inlineScript: 'npm run diff'
+
+      - task: AWSShellScript@1
+        displayName: Run cdk deploy
+        inputs:
+          awsCredentials: 'awpmc-genomics-pd'
+          regionName: 'ap-southeast-2'
+          scriptType: 'inline'
+          inlineScript: 'npm run deploy -- --require-approval never'

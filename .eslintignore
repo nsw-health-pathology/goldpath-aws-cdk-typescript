@@ -1,0 +1,7 @@
+# build artifacts
+dist/*
+coverage/*
+# custom definition files
+.cache
+node_modules
+**/*.d.ts
