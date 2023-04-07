@@ -5,11 +5,13 @@
 
 trigger: 
 - pd
+- np
 
 variables:
 - ${{ if eq(variables['Build.SourceBranchName'], 'pd') }}:
   - group: variable-group-pd
-
+- ${{ if eq(variables['Build.SourceBranchName'], 'np') }}:
+  - group: variable-group-np
 stages:
   - stage: CI
     pool:
@@ -18,6 +20,7 @@ stages:
     - job: Test_Infrastructure
       displayName: Test Infrastructure
       steps:
+
       - checkout: self
         fetchDepth: 1
 
@@ -54,6 +57,7 @@ stages:
       steps:
       - checkout: self
         fetchDepth: 1
+
       - task: NodeTool@0
         displayName: Install Node
         inputs:

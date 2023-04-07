@@ -20,14 +20,9 @@
     "kit",
     "nswhp"
   ],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/nsw-health-pathology/goldpath-aws-cdk-typescript/issues"
-  },
   "homepage": "https://github.com/nsw-health-pathology/goldpath-aws-cdk-typescript#readme",
   "bin": {
-    "my-infrastructure": "bin/my-infrastructure-v1.js"
+    "cdk": "dist/cdk-project.js"
   },
   "scripts": {
     "cdk": "node ./node_modules/aws-cdk/bin/cdk.js",
@@ -36,10 +31,10 @@
     "build": "npm run tsc --",
     "watch": "npm run tsc -- -w",
     "test": "jest",
-    "deploy": "npm run cdk -- deploy",
-    "diff": "npm run cdk -- diff",
+    "deploy": "npx cdk deploy",
+    "diff": "npx cdk diff",
     "ci": "npm run lint && npm run test",
-    "synth": "npx cdk -- synth",
+    "synth": "npx cdk synth",
     "license-check": "license-checker --summary --production --excludePrivatePackages --onlyAllow Apache-2.0;MIT;ISC;BSD;BSD-2-Clause;BSD-3-Clause;MIT*;CC0-1.0;CC-BY-3.0;CC-BY-4.0;BSD*;0BSD;Public Domain;AFLv2.1;"
   },
   "devDependencies": {

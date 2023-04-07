@@ -21,6 +21,7 @@
         "strict": true,
         "skipLibCheck": true,
         "strictNullChecks": true,
+        "outDir": "./dist",
         "strictPropertyInitialization": true,
         "stripInternal": true,
         "target": "ES2018",
