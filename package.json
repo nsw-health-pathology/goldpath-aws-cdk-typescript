@@ -31,10 +31,10 @@
     "build": "npm run tsc --",
     "watch": "npm run tsc -- -w",
     "test": "jest",
-    "deploy": "npx cdk deploy",
-    "diff": "npx cdk diff",
+    "deploy": "cdk deploy",
+    "diff": "cdk diff",
     "ci": "npm run lint && npm run test",
-    "synth": "npx cdk synth",
+    "synth": "cdk synth",
     "license-check": "license-checker --summary --production --excludePrivatePackages --onlyAllow Apache-2.0;MIT;ISC;BSD;BSD-2-Clause;BSD-3-Clause;MIT*;CC0-1.0;CC-BY-3.0;CC-BY-4.0;BSD*;0BSD;Public Domain;AFLv2.1;"
   },
   "devDependencies": {
