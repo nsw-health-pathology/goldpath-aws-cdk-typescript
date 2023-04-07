@@ -48,7 +48,7 @@ stages:
         inputs:
           command: 'custom'
           workingDir: '$(System.DefaultWorkingDirectory)'
-          customCommand: 'run synth'
+          customCommand: 'run synth -- Stack-$(Build.SourceBranchName)'
 
   - stage: CD
     jobs:
@@ -76,12 +76,12 @@ stages:
           awsCredentials: 'awpmc-genomics-pd'
           regionName: 'ap-southeast-2'
           scriptType: 'inline'
-          inlineScript: 'npm run diff'
+          inlineScript: 'npm run diff -- Stack-$(Build.SourceBranchName)'
 
       - task: AWSShellScript@1
         displayName: Run cdk deploy
         inputs:
-          awsCredentials: 'awpmc-genomics-pd'
+          awsCredentials: 'connection-$()'
           regionName: 'ap-southeast-2'
           scriptType: 'inline'
-          inlineScript: 'npm run deploy -- --require-approval never'
+          inlineScript: 'npm run deploy -- Stack-$(Build.SourceBranchName) --require-approval never'
